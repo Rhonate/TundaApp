@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginSpecific extends AppCompatActivity {
+public class LoginSeller extends AppCompatActivity {
+
     Button login;
     TextView signup;
     EditText email,password;
@@ -25,7 +26,7 @@ public class LoginSpecific extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signup = new Intent(LoginSpecific.this, SignUp.class);
+                Intent signup = new Intent(LoginSeller.this, SignUp.class);
                 startActivity(signup);
 
                 finish();
@@ -38,11 +39,10 @@ public class LoginSpecific extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent login = new Intent(LoginSpecific.this, ProductsList.class);
-                startActivity(login);
+                Intent signup = new Intent(LoginSeller.this, SellerHome.class);
+                startActivity(signup);
 
                 finish();
-
             }
         });
 

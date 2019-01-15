@@ -27,6 +27,10 @@
         </activity>
         <activity android:name=".ProductDescription" >
         </activity>
+        <activity android:name=".LoginSeller" >
+        </activity>
+        <activity android:name=".SellerHome" >
+        </activity>
     </application>
 
 </manifest>

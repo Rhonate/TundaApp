@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.Button;
 
 public class HomePage extends AppCompatActivity {
 
     CardView buy,login,sell,products;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,7 @@ public class HomePage extends AppCompatActivity {
         sell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sell=new Intent(HomePage.this, LoginSpecific.class);
+                Intent sell=new Intent(HomePage.this, LoginSeller.class);
                 startActivity(sell);
             }
         });
