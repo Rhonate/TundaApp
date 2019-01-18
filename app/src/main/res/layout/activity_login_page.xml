@@ -64,11 +64,14 @@
     </RadioGroup>
 
     <Button
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/loginbtn"
         android:clickable="true"
+        android:textAllCaps="false"
         android:layout_marginTop="45dp"
         android:layout_below="@+id/radioGroup"
         android:layout_alignRight="@+id/signup"

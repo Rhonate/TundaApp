@@ -81,7 +81,8 @@
         android:text="Submit"
         android:id="@+id/submitbutton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"/>
 
 
 </RelativeLayout>

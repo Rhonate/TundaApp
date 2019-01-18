@@ -39,6 +39,12 @@
         </activity>
         <activity android:name=".AddProduct" >
         </activity>
+        <activity android:name=".Transactions" >
+        </activity>
+        <activity android:name=".BuyerHome" >
+        </activity>
+        <activity android:name=".SellerPdtDescription" >
+        </activity>
     </application>
 
 </manifest>

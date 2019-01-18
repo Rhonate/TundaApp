@@ -38,7 +38,7 @@ public class LoginSpecific extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent login = new Intent(LoginSpecific.this, ProductsList.class);
+                Intent login = new Intent(LoginSpecific.this, BuyerHome.class);
                 startActivity(login);
 
                 finish();
