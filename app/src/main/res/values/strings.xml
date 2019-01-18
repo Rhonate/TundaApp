@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TundaApp</string>
+    <string-array name="categoryList">
+        <item>Vegetables</item>
+        <item>Poultry</item>
+        <item>Animals</item>
+        <item>Food crops</item>
+        <item>Cash crops</item>
+    </string-array>
 </resources>

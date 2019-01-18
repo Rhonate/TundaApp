@@ -15,6 +15,7 @@ public class SellerHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_home);
 
+        //profile button
         profile =(Button)findViewById(R.id.profilebtn);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +27,15 @@ public class SellerHome extends AppCompatActivity {
             }
         });
 
+        //products button
+        products=(Button)findViewById(R.id.products);
+        products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pdts = new Intent(SellerHome.this, SellerProducts.class);
+                startActivity(pdts);
+            }
+        });
 
     }
 }

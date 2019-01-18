@@ -19,7 +19,6 @@ public class LoginPage extends AppCompatActivity {
     private Button login;
     private RadioGroup buysell;
     private RadioButton sellbuy;
-    //EditText email,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +37,11 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+        //Radio group
         buysell=(RadioGroup)findViewById(R.id.radioGroup);
 
-        //email and password
-//        email=(EditText)findViewById(R.id.emailtxt);
-//        password=(EditText)findViewById(R.id.passwordtxt);
-//
-//        email.addTextChangedListener(loginTextWatcher);
-//        password.addTextChangedListener(loginTextWatcher);
     }
+
 
     public void checkButton(View view){
 
@@ -97,25 +92,5 @@ public class LoginPage extends AppCompatActivity {
 
 
     }
-
-//    private TextWatcher loginTextWatcher=new TextWatcher() {
-//        @Override
-//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//        }
-//
-//        @Override
-//        public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            String emailtext = email.getText().toString().trim();
-//            String passwordtext = password.getText().toString().trim();
-//
-//            login.setEnabled(!emailtext.isEmpty() && !passwordtext.isEmpty());
-//        }
-//
-//        @Override
-//        public void afterTextChanged(Editable s) {
-//
-//        }
-//    };
 
 }

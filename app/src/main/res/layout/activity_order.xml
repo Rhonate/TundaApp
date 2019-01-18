@@ -39,5 +39,6 @@
         android:text="Purchase"
         android:id="@+id/purchase"
         android:textSize="18sp"
+        android:enabled="false"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
