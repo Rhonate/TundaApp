@@ -114,9 +114,9 @@
             <Button
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:text="@string/save_changes"
+                android:text="Save Changes"
                 android:textSize="18sp"
-                android:id="@+id/buy"
+                android:id="@+id/savechanges"
                 android:textAllCaps="false"/>
         </LinearLayout>
 

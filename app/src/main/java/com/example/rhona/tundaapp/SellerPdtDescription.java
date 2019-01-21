@@ -12,7 +12,7 @@ public class SellerPdtDescription extends AppCompatActivity {
 
     private TextView tvtitle, tvdesc, tvcat;
     private ImageView img;
-    Button buy;
+    Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,14 @@ public class SellerPdtDescription extends AppCompatActivity {
         tvdesc.setText(description);
         img.setImageResource(image);
 
-        buy=(Button)findViewById(R.id.buy);
-        buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent buy= new Intent(SellerPdtDescription.this, SellerPdt.class);
-                startActivity(buy);
-            }
-        });
+//        save=(Button)findViewById(R.id.savechanges);
+//        save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent save= new Intent(SellerPdtDescription.this, SellerPdt.class);
+//                startActivity(save);
+//            }
+//        });
 
     }
 }

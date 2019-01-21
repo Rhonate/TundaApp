@@ -37,5 +37,15 @@ public class SellerHome extends AppCompatActivity {
             }
         });
 
+        //transactions button
+        transaction=(Button)findViewById(R.id.transaction);
+        transaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent trans = new Intent(SellerHome.this, Transactions.class);
+                startActivity(trans);
+            }
+        });
+
     }
 }
