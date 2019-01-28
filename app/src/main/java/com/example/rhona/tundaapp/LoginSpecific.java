@@ -9,16 +9,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginSpecific extends AppCompatActivity {
     Button login;
     TextView signup;
-    EditText email,password;
+    EditText mail,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_specific);
+
+        mail=(EditText)findViewById(R.id.emailtxt);
+        password=(EditText)findViewById(R.id.passwordtxt);
 
         //signup textview
         signup=(TextView)findViewById(R.id.signuptxt);
@@ -38,19 +45,27 @@ public class LoginSpecific extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent login = new Intent(LoginSpecific.this, BuyerHome.class);
-                startActivity(login);
+                String email = mail.getText().toString();
 
-                finish();
+                String validemail = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+                if (email.matches(validemail)) {
+
+                    Intent login = new Intent(LoginSpecific.this, BuyerHome.class);
+                    startActivity(login);
+
+                    finish();
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Enter Valid Email", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
 
         //email and password
-        email=(EditText)findViewById(R.id.emailtxt);
-        password=(EditText)findViewById(R.id.passwordtxt);
 
-        email.addTextChangedListener(loginTextWatcher);
+        mail.addTextChangedListener(loginTextWatcher);
         password.addTextChangedListener(loginTextWatcher);
     }
 
@@ -62,7 +77,7 @@ public class LoginSpecific extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String emailtext = email.getText().toString().trim();
+            String emailtext = mail.getText().toString().trim();
             String passwordtext = password.getText().toString().trim();
 
             login.setEnabled(!emailtext.isEmpty() && !passwordtext.isEmpty());

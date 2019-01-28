@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class HomePage extends AppCompatActivity {
 
-    CardView buy,login,sell,products;
+    CardView buy,sell,products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +27,15 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        //login cardview
-        login=(CardView)findViewById(R.id.card_view3);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent login= new Intent(HomePage.this, LoginPage.class);
-                startActivity(login);
-            }
-        });
+//        //login cardview
+//        login=(CardView)findViewById(R.id.card_view3);
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent login= new Intent(HomePage.this, LoginPage.class);
+//                startActivity(login);
+//            }
+//        });
 
         //sell cardview
         sell=(CardView)findViewById(R.id.card_view2);

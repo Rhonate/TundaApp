@@ -13,11 +13,15 @@ import android.widget.Toast;
 public class SignUp2 extends AppCompatActivity {
 
     Button back,submit;
-    EditText email, password;
+    EditText mail, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up2);
+
+        //email and password
+        mail=(EditText)findViewById(R.id.email);
+        password=(EditText)findViewById(R.id.passwd);
 
         //back button
         back=(Button)findViewById(R.id.backbtn);
@@ -36,20 +40,29 @@ public class SignUp2 extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SignUp2.this, "Successfully Submitted", Toast.LENGTH_LONG).show(); //a toast
 
-                Intent back = new Intent(SignUp2.this, LoginPage.class);
-                startActivity(back);
+                String email = mail.getText().toString();
 
-                finish();
+                String validemail = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+                if (email.matches(validemail)) {
+
+
+                    Toast.makeText(SignUp2.this, "Successfully Submitted", Toast.LENGTH_LONG).show(); //a toast
+
+                    Intent back = new Intent(SignUp2.this, LoginPage.class);
+                    startActivity(back);
+
+                    finish();
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Enter Valid Email", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
-        //email and password
-        email=(EditText)findViewById(R.id.email);
-        password=(EditText)findViewById(R.id.passwd);
-
-        email.addTextChangedListener(submitTextWatcher);
+        mail.addTextChangedListener(submitTextWatcher);
         password.addTextChangedListener(submitTextWatcher);
     }
 
@@ -61,7 +74,7 @@ public class SignUp2 extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String emailtxt = email.getText().toString().trim();
+            String emailtxt = mail.getText().toString().trim();
             String passwd = password.getText().toString().trim();
 
             submit.setEnabled(!emailtxt.isEmpty() && !passwd.isEmpty());
