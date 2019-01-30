@@ -66,14 +66,42 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ImageView
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/camera"
-        android:src="@drawable/camera"
-        android:layout_below="@+id/categorylist"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_height="match_parent"
+        android:id="@+id/layout"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/categorylist">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take Pic"
+            android:id="@+id/takepic"
+            android:textAllCaps="false"/>
+
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="150dp"
+            android:layout_height="190dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/camera"
+            android:layout_centerHorizontal="true"/>
+
+    </LinearLayout>
+
+
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/camera"-->
+        <!--android:src="@drawable/camera"-->
+        <!--android:layout_below="@+id/categorylist"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="30dp" />-->
 
     <Button
         android:layout_width="wrap_content"
