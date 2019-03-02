@@ -20,7 +20,7 @@
         app:title="TundaApp"
         app:expandedTitleMarginStart="48dp"
         app:expandedTitleMarginEnd="64dp"
-        android:background="@drawable/farming_image">
+        android:background="@drawable/tunda">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarid"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

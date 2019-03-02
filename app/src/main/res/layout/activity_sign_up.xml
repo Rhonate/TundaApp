@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:paddingTop="40dp"
+        android:paddingTop="20dp"
         android:layout_width="fill_parent"
         android:textAlignment="center"
         android:layout_height="wrap_content"
@@ -21,16 +21,24 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:id="@+id/nametxt"
-        android:paddingTop="45dp"
-        android:hint="Name" />
+        android:id="@+id/fnametxt"
+        android:paddingTop="25dp"
+        android:hint="First Name" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:id="@+id/lnametxt"
+        android:paddingTop="25dp"
+        android:hint="Last Name" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:id="@+id/teletxt"
-        android:paddingTop="45dp"
+        android:paddingTop="25dp"
         android:hint="Telephone" />
 
     <EditText
@@ -38,27 +46,53 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:id="@+id/locationtxt"
-        android:paddingTop="45dp"
+        android:paddingTop="25dp"
         android:hint="Location"/>
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:id="@+id/email"
+        android:layout_marginTop="25dp"
+        android:hint="Email" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
 
-        <Button
-            android:layout_marginTop="45dp"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next >>>"
-            android:enabled="false"
-            android:id="@+id/signupnextbtn"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/passwd"
+        android:layout_marginTop="25dp"
+        android:hint="Password" />
 
-    </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:enabled="false"
+        android:id="@+id/submitbtn"/>
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"/>-->
+
+        <!--<Button-->
+            <!--android:layout_marginTop="45dp"-->
+            <!--style="?android:attr/buttonStyleSmall"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Next >>>"-->
+            <!--android:enabled="false"-->
+            <!--android:id="@+id/signupnextbtn"/>-->
+
+    <!--</LinearLayout>-->
 
  </LinearLayout>

@@ -23,7 +23,7 @@ public class BuyerHome extends AppCompatActivity {
                 Intent profile=new Intent(BuyerHome.this, Profile.class);
                 startActivity(profile);
 
-                finish();
+//                finish();
             }
         });
 
@@ -35,7 +35,7 @@ public class BuyerHome extends AppCompatActivity {
                 Intent buypdts = new Intent(BuyerHome.this, ProductsList.class);
                 startActivity(buypdts);
 
-                finish();
+//                finish();
             }
         });
     }
