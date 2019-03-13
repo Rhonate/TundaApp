@@ -49,50 +49,24 @@
         android:paddingTop="25dp"
         android:hint="Location"/>
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:id="@+id/email"
-        android:layout_marginTop="25dp"
-        android:hint="Email" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:id="@+id/passwd"
-        android:layout_marginTop="25dp"
-        android:hint="Password" />
+        <Button
+            android:layout_marginTop="45dp"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next >>>"
+            android:enabled="false"
+            android:id="@+id/signupnextbtn"/>
 
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:enabled="false"
-        android:id="@+id/submitbtn"/>
-
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<View-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"/>-->
-
-        <!--<Button-->
-            <!--android:layout_marginTop="45dp"-->
-            <!--style="?android:attr/buttonStyleSmall"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Next >>>"-->
-            <!--android:enabled="false"-->
-            <!--android:id="@+id/signupnextbtn"/>-->
-
-    <!--</LinearLayout>-->
+    </LinearLayout>
 
  </LinearLayout>
