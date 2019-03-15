@@ -8,7 +8,11 @@
     tools:context="com.example.rhona.tundaapp.SellerHome"
     android:orientation="vertical">
 
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent">-->
 
+    <!--</android.support.design.widget.BottomNavigationView>-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
