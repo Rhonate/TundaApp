@@ -4,95 +4,71 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class LoginSpecific extends AppCompatActivity {
-    Button login;
-    TextView signup;
-    EditText mail,password;
+public class SignUpBuyer extends AppCompatActivity {
+
+    EditText buyer_name, buyer_tele,  buyer_email, buyer_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_specific);
+        setContentView(R.layout.activity_sign_up_buyer);
 
-        mail=(EditText)findViewById(R.id.emailtxt);
-        password=(EditText)findViewById(R.id.passwordtxt);
+        buyer_name=(EditText)findViewById(R.id.buyername);
+        buyer_tele=(EditText)findViewById(R.id.buyertele);
+        buyer_email=(EditText)findViewById(R.id.buyerEmail);
+        buyer_password=(EditText)findViewById(R.id.buyerpassword);
 
-        //signup textview
-        signup=(TextView)findViewById(R.id.signuptxt);
-        signup.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent signup = new Intent(LoginSpecific.this, SignUpBuyer.class);
-                startActivity(signup);
-
+            public void onClick(View view) {
+                //if user pressed on button register
+                //here we will register the user to server
+                registerUser();
+                //starting the profile activity
+                Intent intent = new Intent(SignUpBuyer.this, LoginSpecific.class);
+                startActivity(intent);
                 finish();
             }
         });
 
-        //login button
-        login=(Button)findViewById(R.id.loginbtn);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                userLogin();
-            }
-        });
-
-
-
-
     }
 
-    private void userLogin() {
+    private void registerUser() {
 
-        Log.e("Call: ", "login started");
-        //first getting the values
-        final String buyermail = mail.getText().toString();
-        final String pass = password.getText().toString();
-//        //validating inputs
-        if (TextUtils.isEmpty(buyermail)) {
-            mail.setError("Please enter your email");
-            mail.requestFocus();
+
+        final String bname = buyer_name.getText().toString().trim();
+        final String btele = buyer_tele.getText().toString().trim();
+        final String bemail = buyer_email.getText().toString().trim();
+        final String bpass = buyer_password.getText().toString().trim();
+
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(bemail).matches()) {
+            buyer_email.setError("Enter a valid email");
+            buyer_email.requestFocus();
             return;
         }
 
-        else if (TextUtils.isEmpty(pass)) {
-            password.setError("Please enter your password");
-            password.requestFocus();
-            return;
-        }
-        else {
-            Intent intent = new Intent(LoginSpecific.this, BuyerHome.class);
-            startActivity(intent);
-
-            finish();
-        }
-        //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_BUYERLOGIN,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_BUYERSIGNUP,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -100,7 +76,6 @@ public class LoginSpecific extends AppCompatActivity {
                         try {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
-
                             //if no error in response
                             if (!obj.getBoolean("error")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
@@ -120,6 +95,7 @@ public class LoginSpecific extends AppCompatActivity {
                                 //storing the user in shared preferences
                                 SharePrefManagerBuyer.getInstance(getApplicationContext()).userBuyerLogin(userbuyer);
 
+
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
@@ -128,27 +104,27 @@ public class LoginSpecific extends AppCompatActivity {
                         }
                     }
                 },
+
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Call: ", "error returned");
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", buyermail);
-                params.put("password", pass);
+                params.put("name", bname);
+                params.put("phone", btele);
+                params.put("email", bemail);
+                params.put("password", bpass);
                 return params;
+
+
             }
         };
 
-        Log.e("Call: ", "volley instance");
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
     }
-
 }

@@ -2,6 +2,8 @@ package com.example.rhona.tundaapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 /**
  * Created by Rhona on 1/18/2019.
  */
+
 public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerViewAdapterSeller.MyViewHolder>  {
 
     private Context mContext;
@@ -27,17 +32,20 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.cardview_item_seller_pdt,parent,false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.cardview_item_seller_pdt,parent,false);
+//
+//        LayoutInflater mInflater = LayoutInflater.from(mContext);
+//        view = mInflater.inflate(R.layout.cardview_item_seller_pdt,parent,false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        holder.productname.setText(mData.get(position).getName());
-        holder.product_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        Product product = mData.get(position);
+        holder.productname.setText(product.getName());
+        Glide.with(mContext).load(product.getThumbnail()).into(holder.product_thumbnail);
 
         //click listener
         holder.cardview.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +55,11 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
                 Intent desc = new Intent(mContext,SellerPdtDescription.class);
 
                 //passing data to Decsription Activity
-                desc.putExtra("Title",mData.get(position).getName());
-                desc.putExtra("Description",mData.get(position).getDescription());
-                desc.putExtra("Thumbnail",mData.get(position).getThumbnail());
+                desc.putExtra("product_name",mData.get(position).getName());
+                desc.putExtra("price",mData.get(position).getPrice());
+                desc.putExtra("description",mData.get(position).getDescription());
+//                desc.putExtra("description",mData.get(position).getDescription());
+                desc.putExtra("image",mData.get(position).getThumbnail());
 
                 //starting the activity
                 mContext.startActivity(desc);
@@ -71,7 +81,7 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
         ImageView product_thumbnail;
         CardView cardview;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             productname=(TextView)itemView.findViewById(R.id.PdtName);

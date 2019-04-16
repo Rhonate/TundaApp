@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_products"
+        android:icon="@drawable/baseline_view_carousel_black_48"
+        android:title="@string/nav_products" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/baseline_perm_identity_black_48"
+        android:title="@string/nav_profile" />
+    <item
+        android:id="@+id/nav_transactions"
+        android:icon="@drawable/baseline_attach_money_black_48"
+        android:title="@string/nav_transactions" />
+</menu>

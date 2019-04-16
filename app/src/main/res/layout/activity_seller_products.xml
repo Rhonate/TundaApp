@@ -7,25 +7,25 @@
     tools:context="com.example.rhona.tundaapp.SellerProducts"
     android:padding="8dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rvseller">
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/rvseller">-->
 
-    </android.support.v7.widget.RecyclerView>
+    <!--</android.support.v7.widget.RecyclerView>-->
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addbtn"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:src="@drawable/add1"
-        app:elevation="5dp"
-        app:backgroundTint="@color/green"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        app:borderWidth="0dp"></android.support.design.widget.FloatingActionButton>
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/addbtn"-->
+        <!--android:layout_width="65dp"-->
+        <!--android:layout_height="65dp"-->
+        <!--android:src="@drawable/add1"-->
+        <!--app:elevation="5dp"-->
+        <!--app:backgroundTint="@color/green"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--app:borderWidth="0dp"></android.support.design.widget.FloatingActionButton>-->
 
 </RelativeLayout>

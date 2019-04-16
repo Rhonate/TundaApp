@@ -87,7 +87,6 @@
             android:text="Login"
             android:id="@+id/loginbtn"
             android:clickable="true"
-            android:enabled="false"
             android:background="@color/colorPrimary"
             android:layout_marginTop="250dp"
             android:textColor="@android:color/white" />

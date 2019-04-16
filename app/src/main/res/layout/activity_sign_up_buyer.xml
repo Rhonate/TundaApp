@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.rhona.tundaapp.SignUp">
-
+    tools:context="com.example.rhona.tundaapp.SignUpBuyer">
 
     <TextView
         android:paddingTop="10dp"
@@ -26,25 +26,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:id="@+id/fnametxt"
+            android:id="@+id/buyername"
             android:paddingTop="25dp"
-            android:hint="First Name" />
+            android:hint="Name" />
 
     </android.support.design.widget.TextInputLayout>
 
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:id="@+id/lnametxt"
-            android:paddingTop="25dp"
-            android:hint="Last Name" />
-    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -54,7 +41,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:id="@+id/teletxt"
+            android:id="@+id/buyertele"
             android:paddingTop="25dp"
             android:hint="Telephone" />
     </android.support.design.widget.TextInputLayout>
@@ -66,10 +53,23 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:id="@+id/locationtxt"
+            android:inputType="textEmailAddress"
+            android:id="@+id/buyerEmail"
             android:paddingTop="25dp"
-            android:hint="Location"/>
+            android:hint="Email" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:id="@+id/buyerpassword"
+            android:paddingTop="25dp"
+            android:hint="Password"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -88,10 +88,10 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next >>>"
+            android:text="Submit"
             android:enabled="true"
-            android:id="@+id/signupnextbtn"/>
+            android:id="@+id/submit"/>
 
     </LinearLayout>
 
- </LinearLayout>
+</LinearLayout>

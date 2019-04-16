@@ -1,6 +1,7 @@
 package com.example.rhona.tundaapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.EventLogTags;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 
 public class ProductDescription extends AppCompatActivity {
 
-    private TextView tvtitle, tvdesc, tvcat;
+    private TextView tvname, tvprice, tvdesc, tvcontact;
     private ImageView img;
     Button buy;
 
@@ -20,22 +21,25 @@ public class ProductDescription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_description);
 
-        tvtitle=(TextView)findViewById(R.id.title);
-        tvdesc=(TextView)findViewById(R.id.desc);
-        tvcat=(TextView)findViewById(R.id.category);
+        tvname=(TextView)findViewById(R.id.title);
+        tvprice=(TextView)findViewById(R.id.descprice);
+        tvdesc=(TextView)findViewById(R.id.descdesc);
+        tvcontact=(TextView)findViewById(R.id.contact);
         img=(ImageView)findViewById(R.id.productthumbnail);
 
         //Receive data
 
         Intent desc=getIntent();
-        String title=desc.getExtras().getString("Title");
-        String description=desc.getExtras().getString("Description");
-        int image= desc.getExtras().getInt("Thumbnail");
+        String title=desc.getExtras().getString("product_name");
+        String price=desc.getExtras().getString("price");
+        String description=desc.getExtras().getString("description");
+        String image= desc.getExtras().getString("image");
 
         //setting values
-        tvtitle.setText(title);
+        tvname.setText(title);
+        tvprice.setText(price);
         tvdesc.setText(description);
-        img.setImageResource(image);
+        img.setImageURI(Uri.parse(image));
 
         buy=(Button)findViewById(R.id.buy);
         buy.setOnClickListener(new View.OnClickListener() {

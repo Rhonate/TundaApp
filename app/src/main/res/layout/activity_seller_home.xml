@@ -1,37 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="150dp"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.rhona.tundaapp.SellerHome"
     android:orientation="vertical">
-
-    <!--<android.support.design.widget.BottomNavigationView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent">-->
-
-    <!--</android.support.design.widget.BottomNavigationView>-->
-    <Button
+    <FrameLayout
+        android:id="@+id/main_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:id="@+id/profilebtn"
-        android:textSize="16sp"
-        android:nestedScrollingEnabled="false" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_nav"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="0dp">
 
-    <Button
+    </FrameLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/main_nav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Products"
-        android:id="@+id/products"
-        android:textSize="16sp"/>
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        app:itemBackground="@color/colorPrimaryDark"
+        app:itemIconTint="@color/nav_item_colors"
+        app:itemTextColor="@color/nav_item_colors"
+        app:menu="@menu/nav_items"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="435dp">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Transactions"
-        android:id="@+id/transaction"
-        android:textSize="16sp"/>
-</LinearLayout>
+    </android.support.design.widget.BottomNavigationView>
+
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Profile"-->
+        <!--android:id="@+id/profilebtn"-->
+        <!--android:textSize="16sp"-->
+        <!--android:nestedScrollingEnabled="false"-->
+        <!--android:layout_marginTop="173dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Products"-->
+        <!--android:id="@+id/products"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="80dp" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Transactions"-->
+        <!--android:id="@+id/transaction"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_marginTop="54dp"-->
+        <!--android:layout_below="@+id/profilebtn"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/buttonLogout"-->
+        <!--android:layout_width="210dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginTop="150dp"-->
+        <!--android:layout_marginLeft="75dp"-->
+        <!--android:text="Logout" />-->
+</RelativeLayout>

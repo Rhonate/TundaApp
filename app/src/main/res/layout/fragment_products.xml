@@ -1,0 +1,33 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragProducts"
+    tools:context="com.example.rhona.tundaapp.ProductsFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvseller">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addbtn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/add1"
+        app:elevation="5dp"
+        app:backgroundTint="@color/green"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        app:borderWidth="0dp"
+        android:layout_gravity="right|bottom"></android.support.design.widget.FloatingActionButton>
+
+</FrameLayout>

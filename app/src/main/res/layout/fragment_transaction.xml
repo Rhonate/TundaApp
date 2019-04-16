@@ -1,0 +1,54 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragTransaction"
+    tools:context="com.example.rhona.tundaapp.TransactionFragment">
+
+    <TableRow>
+        <TextView
+            android:text="Date"
+            android:padding="3dip"
+            />
+        <TextView
+            android:text="Buyer"
+            android:layout_marginLeft="12dp"
+            android:padding="3dip"
+            />
+        <TextView
+            android:text="Product"
+            android:padding="3dip"
+            android:layout_marginLeft="12dp"/>
+        <TextView
+            android:text="Price"
+            android:padding="3dip"
+            android:layout_marginLeft="12dp"/>
+        <TextView
+            android:text="Quantity"
+            android:layout_marginLeft="12dp"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="Date"
+            android:padding="3dip"/>
+        <TextView
+            android:text="Name"
+            android:padding="3dip"
+            android:layout_marginLeft="12dp"/>
+        <TextView
+            android:text="Product"
+            android:padding="3dip"
+            android:layout_marginLeft="12dp"/>
+        <TextView
+            android:text="Price"
+            android:layout_marginLeft="12dp"
+            android:padding="3dip" />
+        <TextView
+            android:text="Quantity"
+            android:layout_marginLeft="12dp"
+            android:padding="3dip" />
+    </TableRow>
+
+
+</TableLayout>

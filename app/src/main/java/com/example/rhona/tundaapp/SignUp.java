@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,31 @@ public class SignUp extends AppCompatActivity {
                     lname = lnametext.getText().toString();
                     phone = tele.getText().toString();
                     address = location.getText().toString();
+
+                //validating inputs
+                if (TextUtils.isEmpty(fname)) {
+                    fnametext.setError("Please enter your First name");
+                    fnametext.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(lname)) {
+                    lnametext.setError("Please enter your Last name");
+                    lnametext.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(phone)) {
+                    tele.setError("Please enter your phone number");
+                    tele.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(address)) {
+                    location.setError("Please enter your location");
+                    location.requestFocus();
+                    return;
+                }
 
                     Intent back = new Intent(SignUp.this, SignUp2.class);
                     back.putExtra("firstname", fname);
