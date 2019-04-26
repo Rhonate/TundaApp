@@ -69,7 +69,7 @@
                     android:text="Address"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
+                <EditText
                     android:id="@+id/TVaddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     android:text="Telephone"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
         <Button
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Edit"
+            android:text="Save changes"
             android:id="@+id/edit"
             android:layout_gravity="center_horizontal"
             android:padding="16dp"

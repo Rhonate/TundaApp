@@ -11,6 +11,7 @@ public class URLs {
     public static final String URL_LOGIN= ROOT_URL + "login";
     public static final String URL_BUYERSIGNUP= ROOT_URL + "signupbuyer";
     public static final String URL_BUYERLOGIN= ROOT_URL + "loginbuyer";
+    public static final String URL_UPDATEPROFILE= ROOT_URL + "editProfile";
     public static final String URL_PRODUCTLIST= ANOTHER_ROOT_URL + "getallimages";
     public static final String URL_SELLERPRODUCTS= ANOTHER_ROOT_URL + "getsellerimages";
     public static final String URL_UPLOADIMAGE =BASEDOMAIN+"MyTundaApp/capture_img_upload_to_server.php" ;

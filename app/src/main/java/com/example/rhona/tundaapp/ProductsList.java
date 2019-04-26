@@ -107,6 +107,7 @@ public class ProductsList extends AppCompatActivity {
     }
 
     public void parseVolleyError(VolleyError error) {
+        if (error.networkResponse != null){
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
             JSONObject data = new JSONObject(responseBody);
@@ -119,6 +120,9 @@ public class ProductsList extends AppCompatActivity {
         } catch (UnsupportedEncodingException errorr)
         {
             Toast.makeText(getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
+        }
+        }else{
+            Toast.makeText(getApplicationContext(), "Network is unreachable!! Please connect and try again", Toast.LENGTH_LONG).show();
         }
     }
 

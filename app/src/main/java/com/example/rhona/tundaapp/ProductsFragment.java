@@ -196,18 +196,22 @@ public class ProductsFragment extends Fragment {
 
 
     public void parseVolleyError(VolleyError error) {
-        try {
-            String responseBody = new String(error.networkResponse.data, "utf-8");
-            JSONObject data = new JSONObject(responseBody);
-            JSONArray errors = data.getJSONArray("errors");
-            JSONObject jsonMessage = errors.getJSONObject(0);
-            String message = jsonMessage.getString("message");
-            Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
-        } catch (JSONException e) {
-            Toast.makeText(getActivity().getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
-        } catch (UnsupportedEncodingException errorr)
-        {
-            Toast.makeText(getActivity().getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
+        if (error.networkResponse != null){
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                JSONObject data = new JSONObject(responseBody);
+                JSONArray errors = data.getJSONArray("errors");
+                JSONObject jsonMessage = errors.getJSONObject(0);
+                String message = jsonMessage.getString("message");
+                Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }catch (JSONException e) {
+                Toast.makeText(getActivity().getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
+            } catch (UnsupportedEncodingException errorr)
+            {
+                Toast.makeText(getActivity().getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(getActivity().getApplicationContext(), "Network is unreachable!! Please connect and try again", Toast.LENGTH_LONG).show();
         }
     }
 

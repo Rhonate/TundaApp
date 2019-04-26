@@ -129,8 +129,8 @@ public class AddProduct extends AppCompatActivity {
                 ImageUploadToServerFunction();
 
 //                //going to another intent
-//        Intent intent = new Intent(AddProduct.this, ProductsFragment.class);
-//        startActivity(intent);
+        Intent intent = new Intent(AddProduct.this, SellerHome.class);
+        startActivity(intent);
             }
         });
     }
@@ -201,11 +201,9 @@ public class AddProduct extends AppCompatActivity {
                     return FinalData;
                 }
             }
+
             AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
-
             AsyncTaskUploadClassOBJ.execute();
-
-
         }
 
 
@@ -291,7 +289,8 @@ public class AddProduct extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                stringBuilder.append("Network is Unreachable!!!");
             }
             return stringBuilder.toString();
         }
