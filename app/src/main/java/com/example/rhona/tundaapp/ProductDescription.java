@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class ProductDescription extends AppCompatActivity {
 
     private TextView tvname, tvprice, tvdesc, tvcontact;
@@ -21,6 +23,21 @@ public class ProductDescription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_description);
 
+//        //Receive data
+//        Intent desc=getIntent();
+//        String title=desc.getExtras().getString("product_name");
+//        String description=desc.getExtras().getString("description");
+//        String image= desc.getExtras().getString("image");
+//        String price=desc.getExtras().getString("price");
+//
+//        //setting values
+//        tvtitle.setText(title);
+//        tvdesc.setText(description);
+//        Glide.with(SellerPdtDescription.this).load(image).into(img);
+//        priceEditText.setText(price);
+//        descEditext.setText(description);
+
+        //finding the views
         tvname=(TextView)findViewById(R.id.title);
         tvprice=(TextView)findViewById(R.id.descprice);
         tvdesc=(TextView)findViewById(R.id.descdesc);
@@ -28,7 +45,6 @@ public class ProductDescription extends AppCompatActivity {
         img=(ImageView)findViewById(R.id.productthumbnail);
 
         //Receive data
-
         Intent desc=getIntent();
         String title=desc.getExtras().getString("product_name");
         String price=desc.getExtras().getString("price");
@@ -39,7 +55,7 @@ public class ProductDescription extends AppCompatActivity {
         tvname.setText(title);
         tvprice.setText(price);
         tvdesc.setText(description);
-        img.setImageURI(Uri.parse(image));
+        Glide.with(ProductDescription.this).load(image).into(img);
 
         buy=(Button)findViewById(R.id.buy);
         buy.setOnClickListener(new View.OnClickListener() {

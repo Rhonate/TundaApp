@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ public class LoginSeller extends AppCompatActivity {
     EditText email, etPassword;
     ProgressBar progressBar;
     Button login;
+    TextView forgotpassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginSeller extends AppCompatActivity {
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         email = (EditText)findViewById(R.id.emailtxt);
         etPassword = (EditText)findViewById(R.id.passwordtxt);
+        forgotpassword = (TextView)findViewById(R.id.forgotPassword);
 
 
 
@@ -51,6 +54,14 @@ public class LoginSeller extends AppCompatActivity {
 
                 userLogin();
                 //starting the profile activity
+
+            }
+        });
+
+        //forgotpassword
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
@@ -83,71 +94,71 @@ public class LoginSeller extends AppCompatActivity {
             return;
         }
         else {
-            Intent intent = new Intent(LoginSeller.this, SellerHome.class);
-            startActivity(intent);
+            //if everything is fine
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_LOGIN,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.e("Response: ", response);
+                            progressBar.setVisibility(View.GONE);
+                            try {
+                                //converting response to json object
+                                JSONObject obj = new JSONObject(response);
 
-            finish();
-        }
-        //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_LOGIN,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("Response: ", response);
-                        progressBar.setVisibility(View.GONE);
-                        try {
-                            //converting response to json object
-                            JSONObject obj = new JSONObject(response);
-
-                            //if no error in response
-                            if (!obj.getBoolean("error")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                                //getting the user from the response
-                                JSONObject userJson = obj.getJSONObject("user");
-
-                                //creating a new user object
-                                User user = new User(
-                                        userJson.getInt("id"),
-                                        userJson.getString("fname"),
-                                        userJson.getString("lname"),
-                                        userJson.getString("phone"),
-                                        userJson.getString("address"),
-                                        userJson.getString("email"),
-                                        userJson.getString("user"),
-                                        userJson.getString("password")
-                                );
-
-                                //storing the user in shared preferences
-                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
-                            } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                //if no error in response
+                                if (!obj.getBoolean("error")) {
+                                    //getting the user from the response
+                                    JSONObject userJson = obj.getJSONObject("users");
+                                    //creating a new user object
+                                    User user = new User(
+                                            userJson.getInt("id"),
+                                            userJson.getString("fname"),
+                                            userJson.getString("lname"),
+                                            userJson.getString("phone"),
+                                            userJson.getString("location"),
+                                            userJson.getString("email"),
+                                            userJson.getString("user")
+                                    );
+                                    //storing the user in shared preferences
+//                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                                    SharedPrefManager sp= new SharedPrefManager(LoginSeller.this);
+                                    sp.userLogin(user);
+                                    if(obj.getString("message").contentEquals("Login successfull")){
+                                        Intent intent = new Intent(LoginSeller.this, SellerHome.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Error: "+obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Error: "+obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.e("JSON Exception: ", ""+e);
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Call: ", "error returned");
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Call: ", "error returned");
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", _email);
-                params.put("password", password);
-                return params;
-            }
-        };
+                        }
+                    })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("email", _email);
+                    params.put("password", password);
+                    return params;
+                }
+            };
 
-        Log.e("Call: ", "volley instance");
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+            Log.e("Call: ", "volley instance");
+            VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+        }
     }
 }

@@ -6,9 +6,9 @@ package com.example.rhona.tundaapp;
 public class User {
 
     private int id;
-    private String fname, lname, phone, address, email, user, password;
+    private String fname, lname, phone, address, email, user;
 
-    public User(int id, String fname, String lname, String phone, String address, String email, String user, String password) {
+    public User(int id, String fname, String lname, String phone, String address, String email, String user) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
@@ -16,7 +16,6 @@ public class User {
         this.address = address;
         this.email = email;
         this.user = user;
-        this.password = password;
     }
 
     public int getId() {
@@ -75,11 +74,4 @@ public class User {
         this.user = user;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

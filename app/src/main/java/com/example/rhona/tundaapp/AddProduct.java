@@ -127,6 +127,10 @@ public class AddProduct extends AppCompatActivity {
 
 
                 ImageUploadToServerFunction();
+
+//                //going to another intent
+//        Intent intent = new Intent(AddProduct.this, ProductsFragment.class);
+//        startActivity(intent);
             }
         });
     }
@@ -153,7 +157,7 @@ public class AddProduct extends AppCompatActivity {
                     super.onPreExecute();
 
                     // Showing progress dialog at image upload time.
-                    progressDialog = ProgressDialog.show(AddProduct.this, "Image is Uploading", "Please Wait", false, false);
+                    progressDialog = ProgressDialog.show(AddProduct.this, "Uploading your information", "Please Wait", false, false);
                 }
 
                 @Override
@@ -177,9 +181,13 @@ public class AddProduct extends AppCompatActivity {
                 protected String doInBackground(Void... params) {
 
                     ImageProcessClass imageProcessClass = new ImageProcessClass();
+                    SharedPrefManager sp= new SharedPrefManager(AddProduct.this);
+                    User u=sp.getUser();
+                    int uid=u.getId();
 
                     HashMap<String,String> HashMapParams = new HashMap<String,String>();
-                    HashMapParams.put(SharedPrefManager.KEY_ID,idtoserver);
+                    HashMapParams.put(idtoserver,""+uid);
+//                    Log.e("id",SharedPrefManager.KEY_EMAIL);
                     HashMapParams.put(prod, pnameToserver);
                     HashMapParams.put(prod_price, pricetoserver);
                     HashMapParams.put(prod_desc, descriptiontoserver);
@@ -196,6 +204,8 @@ public class AddProduct extends AppCompatActivity {
             AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
 
             AsyncTaskUploadClassOBJ.execute();
+
+
         }
 
 
@@ -216,7 +226,7 @@ public class AddProduct extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Data is null", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "unable to return  image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No image taken", Toast.LENGTH_SHORT).show();
         }
 
     }

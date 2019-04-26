@@ -150,7 +150,10 @@ public class ProductsFragment extends Fragment {
 //        });
 //
 //        MyApplication.getInstance().addToRequestQueue(request);
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_PRODUCTLIST,
+        SharedPrefManager sp= new SharedPrefManager(getContext());
+        User u=sp.getUser();
+        int uid=u.getId();
+    StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_SELLERPRODUCTS+"&&seller_id="+uid,
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -162,10 +165,11 @@ public class ProductsFragment extends Fragment {
                             JSONObject object = array.getJSONObject(i);
                             Product product = new Product();
                             product.setName(object.getString("product_name"));
-//                                product.setDescription(object.getString("description"));
-                            Log.e("product_name", object.getString("product_name"));
+                            product.setPrice(object.getString("price"));
+                            product.setDescription(object.getString("description"));
+//                            Log.e("product_name", object.getString("product_name"));
                             product.setThumbnail(object.getString("image"));
-                            Log.e("image", object.getString("image"));
+//                            Log.e("image", object.getString("image"));
 
                             productList.add(product);
 

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,9 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
 
         Product product = mData.get(position);
         holder.productname.setText(product.getName());
+        holder.productprice.setText(product.getPrice());
         Glide.with(mContext).load(product.getThumbnail()).into(holder.product_thumbnail);
+
 
         //click listener
         holder.cardview.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +60,9 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
                 //passing data to Decsription Activity
                 desc.putExtra("product_name",mData.get(position).getName());
                 desc.putExtra("price",mData.get(position).getPrice());
-                desc.putExtra("description",mData.get(position).getDescription());
+                Log.e("Price", mData.get(position).getPrice());
+                desc.putExtra("description", mData.get(position).getDescription());
+//                desc.putExtra("phone",mData.get(position).getPhone());
 //                desc.putExtra("description",mData.get(position).getDescription());
                 desc.putExtra("image",mData.get(position).getThumbnail());
 
@@ -77,7 +82,7 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView productname;
+        TextView productname, productprice;
         ImageView product_thumbnail;
         CardView cardview;
 
@@ -85,6 +90,7 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
             super(itemView);
 
             productname=(TextView)itemView.findViewById(R.id.PdtName);
+            productprice=(TextView)itemView.findViewById(R.id.Pdtprice);
             product_thumbnail=(ImageView)itemView.findViewById(R.id.PdtImage);
             cardview=(CardView)itemView.findViewById(R.id.cardview_seller_pdts);
         }

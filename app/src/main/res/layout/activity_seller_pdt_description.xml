@@ -60,7 +60,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <EditText
-                    android:id="@+id/category"
+                    android:id="@+id/priceET"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
@@ -79,15 +79,15 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seller:   "
+                    android:text="Description:   "
                     />
                 <EditText
-                    android:id="@+id/desc"
+                    android:id="@+id/descET"
                     android:textSize="18sp"
                     android:layout_marginTop="10dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seller"
+                    android:text="Description"
                     />
             </LinearLayout>
             <LinearLayout

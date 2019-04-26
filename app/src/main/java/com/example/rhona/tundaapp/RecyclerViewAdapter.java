@@ -34,7 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView productname;
+        TextView productname, productprice;
         ImageView product_thumbnail;
         CardView cardview;
 
@@ -43,6 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
 
             productname=(TextView)itemView.findViewById(R.id.ProductName);
+            productprice=(TextView)itemView.findViewById(R.id.ProductPriceTV);
             product_thumbnail=(ImageView)itemView.findViewById(R.id.ProductImage);
             cardview=(CardView)itemView.findViewById(R.id.cardview_products);
         }
@@ -62,6 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Product product = mData.get(position);
         holder.productname.setText(product.getName());
+        holder.productprice.setText(product.getPrice());
         Glide.with(mContext).load(product.getThumbnail()).into(holder.product_thumbnail);
 
 //click listener

@@ -75,6 +75,8 @@ public class ProductsList extends AppCompatActivity {
                                 JSONObject object = array.getJSONObject(i);
                                 Product product = new Product();
                                 product.setName(object.getString("product_name"));
+                                product.setPrice(object.getString("price"));
+                                product.setDescription(object.getString("description"));
 //                                product.setDescription(object.getString("description"));
                                 Log.e("product_name", object.getString("product_name"));
                                 product.setThumbnail(object.getString("image"));

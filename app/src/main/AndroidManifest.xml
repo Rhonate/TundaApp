@@ -67,6 +67,8 @@
 
         <activity android:name=".SignUpBuyer" >
         </activity>
+        <activity android:name=".EditProfile" >
+        </activity>
     </application>
 
 </manifest>

@@ -155,8 +155,7 @@ public class SignUp2 extends AppCompatActivity {
                                         userJson.getString("phone"),
                                         userJson.getString("location"),
                                         userJson.getString("email"),
-                                        userJson.getString("user"),
-                                        userJson.getString("password")
+                                        userJson.getString("user")
                                 );
 
                                 //storing the user in shared preferences

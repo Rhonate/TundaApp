@@ -7,6 +7,7 @@ package com.example.rhona.tundaapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SharedPrefManager {
 
@@ -18,11 +19,10 @@ public class SharedPrefManager {
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_USER = "keyuser";
     public static final String KEY_ID = "keyid";
-    private static final String KEY_PASSWORD = "keypassword";
     private static SharedPrefManager mInstance;
     private static Context ctx;
 
-    private SharedPrefManager(Context context) {
+    public SharedPrefManager(Context context) {
         ctx = context;
     }
     public static synchronized SharedPrefManager getInstance(Context context) {
@@ -49,7 +49,11 @@ public class SharedPrefManager {
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_EMAIL, null) != null;
+        if(sharedPreferences.getString(KEY_EMAIL, null) != null){
+             return true;
+        } else {
+            return false;
+        }
     }
 
     //this method will give the logged in user
@@ -62,9 +66,9 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_PHONE, null),
                 sharedPreferences.getString(KEY_ADDRESS, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
-                sharedPreferences.getString(KEY_USER, null),
-                sharedPreferences.getString(KEY_PASSWORD, null)
+                sharedPreferences.getString(KEY_USER, null)
         );
+
     }
 
     //this method will logout the user
