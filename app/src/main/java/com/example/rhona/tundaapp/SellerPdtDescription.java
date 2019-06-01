@@ -45,7 +45,7 @@ public class SellerPdtDescription extends AppCompatActivity {
         img=(ImageView)findViewById(R.id.productthumbnail);
         priceEditText=(EditText)findViewById(R.id.priceET);
         descEditext=(EditText)findViewById(R.id.descET);
-        save = (Button)findViewById(R.id.savechanges);
+//        save = (Button)findViewById(R.id.savechanges);
 
         //Receive data
         Intent desc=getIntent();
