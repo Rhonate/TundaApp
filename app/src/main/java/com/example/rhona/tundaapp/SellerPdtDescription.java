@@ -41,7 +41,7 @@ public class SellerPdtDescription extends AppCompatActivity {
 
         //finding views
         tvtitle=(TextView)findViewById(R.id.title);
-        tvcont=(TextView)findViewById(R.id.sellcontact);
+//        tvcont=(TextView)findViewById(R.id.sellcontact);
         img=(ImageView)findViewById(R.id.productthumbnail);
         priceEditText=(EditText)findViewById(R.id.priceET);
         descEditext=(EditText)findViewById(R.id.descET);
