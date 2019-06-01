@@ -36,46 +36,4 @@
 
     </android.support.design.widget.BottomNavigationView>
 
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Profile"-->
-        <!--android:id="@+id/profilebtn"-->
-        <!--android:textSize="16sp"-->
-        <!--android:nestedScrollingEnabled="false"-->
-        <!--android:layout_marginTop="173dp"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Products"-->
-        <!--android:id="@+id/products"-->
-        <!--android:textSize="16sp"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_marginTop="80dp" />-->
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Transactions"-->
-        <!--android:id="@+id/transaction"-->
-        <!--android:textSize="16sp"-->
-        <!--android:layout_marginTop="54dp"-->
-        <!--android:layout_below="@+id/profilebtn"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/buttonLogout"-->
-        <!--android:layout_width="210dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_marginTop="150dp"-->
-        <!--android:layout_marginLeft="75dp"-->
-        <!--android:text="Logout" />-->
 </RelativeLayout>

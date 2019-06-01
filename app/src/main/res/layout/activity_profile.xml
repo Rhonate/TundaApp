@@ -45,11 +45,21 @@
         android:textColor="#000"
         android:padding="16dp"/>
 
+    <!--<Button-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Edit"-->
+        <!--android:id="@+id/edit"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:padding="16dp"-->
+        <!--android:paddingTop="150dp"-->
+        <!--android:textColor="#000"/>-->
+
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Edit"
-        android:id="@+id/edit"
+        android:text="Logout"
+        android:id="@+id/outlog"
         android:layout_gravity="center_horizontal"
         android:padding="16dp"
         android:paddingTop="150dp"

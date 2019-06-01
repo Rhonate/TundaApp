@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_profilebuyer"
+        android:icon="@drawable/baseline_perm_identity_black_48"
+        android:title="@string/nav_profilebuyer" />
+    <item
+        android:id="@+id/nav_productsbuyer"
+        android:icon="@drawable/baseline_view_carousel_black_48"
+        android:title="@string/nav_productsbuyer" />
+    <item
+        android:id="@+id/nav_logoutbuyer"
+        android:icon="@drawable/icons8_shutdown_32"
+        android:title="@string/nav_logoutbuyer" />
+
+
+</menu>

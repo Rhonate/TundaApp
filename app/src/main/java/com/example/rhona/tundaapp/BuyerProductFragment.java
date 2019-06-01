@@ -1,26 +1,29 @@
 package com.example.rhona.tundaapp;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,21 +32,24 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ProductsList extends AppCompatActivity {
+public class BuyerProductFragment extends android.support.v4.app.Fragment {
 
     RecyclerView recycler_view;
     RequestQueue mRequestQueue;
     private List<Product> mData = new ArrayList<>();
     RecyclerViewAdapter adapter;
 
+    public BuyerProductFragment() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_buyer_product, container, false);
 
         //setting up volley request queue
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+        Cache cache = new DiskBasedCache(getActivity().getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         mRequestQueue = new RequestQueue(cache, network);
         mRequestQueue.start();
@@ -53,15 +59,17 @@ public class ProductsList extends AppCompatActivity {
         getProduct();
 
         //initialising recyclerview and setting adapter to the recyclerview
-        recycler_view = (RecyclerView)findViewById(R.id.recyclerview);
-        adapter = new RecyclerViewAdapter(this, mData);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        recycler_view = view.findViewById(R.id.rvbuyer);
+        adapter = new RecyclerViewAdapter(getActivity(), mData);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),2);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         recycler_view.setAdapter(adapter);
+
+
+        return  view;
     }
 
-        //method to parse json data from url
     public void getProduct(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_PRODUCTLIST,
                 new Response.Listener<String>() {
@@ -77,9 +85,11 @@ public class ProductsList extends AppCompatActivity {
                                 product.setName(object.getString("product_name"));
                                 product.setPrice(object.getString("price"));
                                 product.setDescription(object.getString("description"));
+//                                product.setDescription(object.getString("description"));
+//                                Log.e("product_name", object.getString("product_name"));
                                 product.setThumbnail(object.getString("image"));
+//                                Log.e("image", object.getString("image"));
                                 product.setPhone(object.getString("phone"));
-//                                Log.e("phone", object.getString("phone"));
 
                                 mData.add(product);
 
@@ -107,24 +117,24 @@ public class ProductsList extends AppCompatActivity {
 
     public void parseVolleyError(VolleyError error) {
         if (error.networkResponse != null){
-        try {
-            String responseBody = new String(error.networkResponse.data, "utf-8");
-            JSONObject data = new JSONObject(responseBody);
-            JSONArray errors = data.getJSONArray("errors");
-            JSONObject jsonMessage = errors.getJSONObject(0);
-            String message = jsonMessage.getString("message");
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-        } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
-        } catch (UnsupportedEncodingException errorr)
-        {
-            Toast.makeText(getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
-        }
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                JSONObject data = new JSONObject(responseBody);
+                JSONArray errors = data.getJSONArray("errors");
+                JSONObject jsonMessage = errors.getJSONObject(0);
+                String message = jsonMessage.getString("message");
+                Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            } catch (JSONException e) {
+                Toast.makeText(getActivity().getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
+            } catch (UnsupportedEncodingException errorr)
+            {
+                Toast.makeText(getActivity().getApplicationContext(), "Please connect to the internet and try again", Toast.LENGTH_LONG).show();
+            }
         }else{
-            Toast.makeText(getApplicationContext(), "Network is unreachable!! Please connect and try again", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Network is unreachable!! Please connect and try again", Toast.LENGTH_LONG).show();
         }
     }
 
+
+
 }
-
-

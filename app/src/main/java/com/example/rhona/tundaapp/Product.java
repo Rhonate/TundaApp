@@ -9,18 +9,20 @@ public class Product {
     private String category;
     private String description;
     private String thumbnail;
+    private String phone;
 
     public Product() {
 
 
     }
 
-    public Product(String name, String price, String category, String description, String thumbnail) {
+    public Product(String name, String price, String category, String description, String thumbnail, String phone) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.description = description;
         this.thumbnail = thumbnail;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -61,5 +63,13 @@ public class Product {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

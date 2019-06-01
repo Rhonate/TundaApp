@@ -123,19 +123,24 @@ public class LoginSeller extends AppCompatActivity {
 //                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                     SharedPrefManager sp= new SharedPrefManager(LoginSeller.this);
                                     sp.userLogin(user);
-                                    if(obj.getString("message").contentEquals("Login successfull")){
+                                    if(obj.getString("error").contentEquals("false")){
                                         Intent intent = new Intent(LoginSeller.this, SellerHome.class);
                                         startActivity(intent);
                                         finish();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "Error: "+obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if(obj.getString("error").contentEquals("true") ){
+                                        Toast.makeText(getApplicationContext(), "Error: "+obj.getString("message"), Toast.LENGTH_LONG).show();
+
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), "Error: "+obj.getString("message"), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Error: "+obj.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Log.e("JSON Exception: ", ""+e);
+                                Log.e("JSON Exception: ", "Incorrect Email or Password"+e);
                             }
                         }
                     },

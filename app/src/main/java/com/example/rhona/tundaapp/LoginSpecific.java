@@ -37,11 +37,16 @@ public class LoginSpecific extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_specific);
 
-        mail=(EditText)findViewById(R.id.emailtxt);
-        password=(EditText)findViewById(R.id.passwordtxt);
+        if (SharePrefManagerBuyer.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, BuyerHome.class));
+        }
+
+        mail=(EditText)findViewById(R.id.emailtxt1);
+        password=(EditText)findViewById(R.id.passwordtxt1);
 
         //signup textview
-        signup=(TextView)findViewById(R.id.signuptxt);
+        signup=(TextView)findViewById(R.id.signuptxt1);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +58,7 @@ public class LoginSpecific extends AppCompatActivity {
         });
 
         //login button
-        login=(Button)findViewById(R.id.loginbtn);
+        login=(Button)findViewById(R.id.loginbtn1);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +74,7 @@ public class LoginSpecific extends AppCompatActivity {
 
     private void userLogin() {
 
-        Log.e("Call: ", "login started");
+//        Log.e("Call: ", "login started");
         //first getting the values
         final String buyermail = mail.getText().toString();
         final String pass = password.getText().toString();
@@ -86,68 +91,81 @@ public class LoginSpecific extends AppCompatActivity {
             return;
         }
         else {
-            Intent intent = new Intent(LoginSpecific.this, BuyerHome.class);
-            startActivity(intent);
 
-            finish();
-        }
-        //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_BUYERLOGIN,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("Response: ", response);
-                        try {
-                            //converting response to json object
-                            JSONObject obj = new JSONObject(response);
+            //if everything is fine
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_BUYERLOGIN,
+                    new Response.Listener<String>() {
+                        @Override
 
-                            //if no error in response
-                            if (!obj.getBoolean("error")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        public void onResponse(String response) {
+                            Log.e("Response: ", response);
+                            try {
+                                //converting response to json object
+                                JSONObject b_obj = new JSONObject(response);
+                                //if no error in response
+                                if (!b_obj.getBoolean("error")) {
+                                    //getting the user from the response
+                                    JSONObject userbuyerJson = b_obj.getJSONObject("users");
 
-                                //getting the user from the response
-                                JSONObject userbuyerJson = obj.getJSONObject("userbuyer");
+                                    Log.e("Email: ", buyermail);
+                                    //creating a new user object
+                                    UserBuyer userbuyer = new UserBuyer(
+                                            userbuyerJson.getInt("id"),
+                                            userbuyerJson.getString("name"),
+                                            userbuyerJson.getString("phone"),
+                                            userbuyerJson.getString("email"),
+                                            ""
+                                    );
 
-                                //creating a new user object
-                                UserBuyer userbuyer = new UserBuyer(
-                                        userbuyerJson.getInt("id"),
-                                        userbuyerJson.getString("name"),
-                                        userbuyerJson.getString("phone"),
-                                        userbuyerJson.getString("email"),
-                                        userbuyerJson.getString("password")
-                                );
+                                    //storing the user in shared preferences
+//                                    SharePrefManagerBuyer.getInstance(getApplicationContext()).userBuyerLogin(userbuyer);
 
-                                //storing the user in shared preferences
-                                SharePrefManagerBuyer.getInstance(getApplicationContext()).userBuyerLogin(userbuyer);
+                                    SharePrefManagerBuyer b_sp = new SharePrefManagerBuyer(LoginSpecific.this);
+                                    b_sp.userBuyerLogin(userbuyer);
+                                    if (b_obj.getString("error").contentEquals("false")) {
+                                        Intent intent = new Intent(LoginSpecific.this, BuyerHome.class);
+                                        startActivity(intent);
+                                        finish();
 
-                            } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (b_obj.getString("error").contentEquals("true") ){
+                                        Toast.makeText(getApplicationContext(), "Error: " +b_obj.getString("message"), Toast.LENGTH_LONG).show();
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), "Error: "+b_obj.getString("message"), Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Error: " + b_obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.e("JSON Exception: ", "Incorrect Email or Password"+e);
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Call: ", "error returned");
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Call: ", "error returned");
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", buyermail);
-                params.put("password", pass);
-                return params;
-            }
-        };
+                        }
+                    })
 
-        Log.e("Call: ", "volley instance");
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("email", buyermail);
+                    params.put("password", pass);
+                    return params;
+                }
+            };
+
+//            Log.e("Call: ", "volley instance");
+            VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+        }
 
     }
 

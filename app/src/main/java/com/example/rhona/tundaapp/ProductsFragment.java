@@ -48,7 +48,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class ProductsFragment extends Fragment {
-//    private List<Product> lstpdt;
+    //    private List<Product> lstpdt;
     FloatingActionButton addbutton;
 
 
@@ -90,6 +90,7 @@ public class ProductsFragment extends Fragment {
 
                 Intent addbtn = new Intent(getActivity(), AddProduct.class);
                 startActivity(addbtn);
+                getActivity().finish();
 
             }
         });
@@ -122,75 +123,51 @@ public class ProductsFragment extends Fragment {
     private void fetchProductItems() {
 
 
-//        JsonArrayRequest request = new JsonArrayRequest(URLs.URL_PRODUCTLIST,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        if (response == null) {
-//                            Toast.makeText(getActivity(), "Couldn't fetch the store items! Please try again.", Toast.LENGTH_LONG).show();
-//                            return;
-//                        }
-//
-//                        List<Product> items = new Gson().fromJson(response.toString(), new TypeToken<List<Product>>() {
-//                        }.getType());
-//
-//                        productList.clear();
-//                        productList.addAll(items);
-//
-//                        // refreshing recycler view
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                // error in getting json
-//                Log.e(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getActivity(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        MyApplication.getInstance().addToRequestQueue(request);
+
         SharedPrefManager sp= new SharedPrefManager(getContext());
         User u=sp.getUser();
         int uid=u.getId();
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_SELLERPRODUCTS+"&&seller_id="+uid,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_SELLERPRODUCTS+"&&seller_id="+uid,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-                    try {
-                        JSONObject json = new JSONObject(response);
-                        JSONArray array = json.getJSONArray("images");
-                        for(int i=0;i<array.length();i++){
-                            JSONObject object = array.getJSONObject(i);
-                            Product product = new Product();
-                            product.setName(object.getString("product_name"));
-                            product.setPrice(object.getString("price"));
-                            product.setDescription(object.getString("description"));
+                        try {
+//                            Log.e("Loadin: ", "162");
+                            JSONObject json = new JSONObject(response);
+                            JSONArray array = json.getJSONArray("images");
+                            for(int i=0;i<array.length();i++){
+                                JSONObject object = array.getJSONObject(i);
+                                Product product = new Product();
+                                product.setName(object.getString("product_name"));
+//                                Log.e("Product: ", object.getString("product_name"));
+                                product.setPrice(object.getString("price"));
+                                product.setDescription(object.getString("description"));
 //                            Log.e("product_name", object.getString("product_name"));
-                            product.setThumbnail(object.getString("image"));
+                                product.setThumbnail(object.getString("image"));
 //                            Log.e("image", object.getString("image"));
 
-                            productList.add(product);
+                                productList.add(product);
 
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+//                        Log.e("Adapter: ", "Update");
+                        mAdapter.notifyDataSetChanged();
+
                     }
-                    mAdapter.notifyDataSetChanged();
-
-                }
-            }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-
-            parseVolleyError(error);
-        }
-    });
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                Log.e("Error: ", "186-"+error);
+                parseVolleyError(error);
+            }
+        });
 
 
-    stringRequest.setShouldCache(false);
-    mRequestQueue.add(stringRequest);
+        stringRequest.setShouldCache(false);
+        mRequestQueue.add(stringRequest);
 
     }
 
@@ -215,48 +192,6 @@ public class ProductsFragment extends Fragment {
         }
     }
 
-//
-//    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-//
-//        private int spanCount;
-//        private int spacing;
-//        private boolean includeEdge;
-//
-//        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-//            this.spanCount = spanCount;
-//            this.spacing = spacing;
-//            this.includeEdge = includeEdge;
-//        }
-//
-//        @Override
-//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//            int position = parent.getChildAdapterPosition(view); // item position
-//            int column = position % spanCount; // item column
-//
-//            if (includeEdge) {
-//                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-//                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-//
-//                if (position < spanCount) { // top edge
-//                    outRect.top = spacing;
-//                }
-//                outRect.bottom = spacing; // item bottom
-//            } else {
-//                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-//                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-//                if (position >= spanCount) {
-//                    outRect.top = spacing; // item top
-//                }
-//            }
-//        }
-//    }
-//
-//    /**
-//     * Converting dp to pixel
-//     */
-//    private int dpToPx(int dp) {
-//        Resources r = getResources();
-//        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-//    }
+
 
 }

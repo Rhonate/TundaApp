@@ -62,7 +62,7 @@ public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerView
                 desc.putExtra("price",mData.get(position).getPrice());
                 Log.e("Price", mData.get(position).getPrice());
                 desc.putExtra("description", mData.get(position).getDescription());
-//                desc.putExtra("phone",mData.get(position).getPhone());
+                desc.putExtra("phone",mData.get(position).getPhone());
 //                desc.putExtra("description",mData.get(position).getDescription());
                 desc.putExtra("image",mData.get(position).getThumbnail());
 

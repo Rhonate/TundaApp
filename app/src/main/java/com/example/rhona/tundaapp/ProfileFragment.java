@@ -80,7 +80,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Log.e("Response: ", response);
+//                            Log.e("Response: ", response);
                             try {
                                 //converting response to json object
                                 JSONObject obj = new JSONObject(response);
@@ -104,7 +104,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                     );
                                     sp.userLogin(user);
 
-                                    if(msg.contentEquals("User updated successfully")){
+                                    if(msg.contentEquals("Details updated successfully")){
                                         Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getActivity(), SellerHome.class);
                                         startActivity(intent);
@@ -160,6 +160,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view){
         if(view.equals(btnLogout)){
             SharedPrefManager.getInstance(getContext().getApplicationContext()).logout();
+            getActivity().finish();
         }
     }
 }

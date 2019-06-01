@@ -77,6 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 desc.putExtra("product_name",mData.get(position).getName());
                 desc.putExtra("price",mData.get(position).getPrice());
                 desc.putExtra("description",mData.get(position).getDescription());
+                desc.putExtra("phone",mData.get(position).getPhone());
 //                desc.putExtra("description",mData.get(position).getDescription());
                 desc.putExtra("image",mData.get(position).getThumbnail());
 

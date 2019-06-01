@@ -9,14 +9,16 @@ public class SellerPdt {
     private String category;
     private String Description;
     private int Thumbnail;
+    private String phone;
 
     public SellerPdt() {
 
     }
 
-    public SellerPdt(String name, String category, String description, int thumbnail) {
+    public SellerPdt(String name, String category, String description, int thumbnail, String phone) {
         Name = name;
         this.category = category;
+        this.phone = phone;
         Description = description;
         Thumbnail = thumbnail;
     }
@@ -52,5 +54,13 @@ public class SellerPdt {
 
     public void setThumbnail(int thumbnail) {
         Thumbnail = thumbnail;
+    }
+
+    public String getPhone (String phone) {
+        return phone;
+    }
+
+    public void setPhone (String phone) {
+        phone = phone;
     }
 }

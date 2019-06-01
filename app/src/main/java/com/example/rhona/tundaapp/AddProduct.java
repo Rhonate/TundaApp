@@ -2,7 +2,9 @@ package com.example.rhona.tundaapp;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,7 +12,11 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -46,6 +52,8 @@ import javax.net.ssl.HttpsURLConnection;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class AddProduct extends AppCompatActivity {
+
+    private int STORAGE_PERMISSION_CODE = 1;
 
     Spinner category;
     Button camera,submit;
@@ -96,20 +104,52 @@ public class AddProduct extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                if (ContextCompat.checkSelfPermission(AddProduct.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+
+//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+
+                    File filePicture = new File(Environment.getExternalStorageDirectory(), picture_folder);
+                    if (!filePicture.exists())
+                        filePicture.mkdirs();
+                    outputUriCamera = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), picture_folder + "/mypicture.jpg"));
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.TITLE, "mypicture.jpg");
+                    values.put(MediaStore.Images.Media.DESCRIPTION, picture_folder);
+                    outputImageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    startActivityForResult(new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                    .putExtra(MediaStore.EXTRA_OUTPUT, outputImageUri), OpenCamera);
 
 
-                File filePicture = new File(Environment.getExternalStorageDirectory(), picture_folder);
-                if (!filePicture.exists())
-                    filePicture.mkdirs();
-                outputUriCamera = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), picture_folder + "/mypicture.jpg"));
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.Media.TITLE, "mypicture.jpg");
-                values.put(MediaStore.Images.Media.DESCRIPTION, picture_folder);
-                outputImageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                startActivityForResult(new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-                        .putExtra(MediaStore.EXTRA_OUTPUT, outputImageUri), OpenCamera);
+                }else {
+
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(AddProduct.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+                        new AlertDialog.Builder(AddProduct.this)
+                                .setTitle("Permission needed")
+                                .setMessage("This permission is needed for the camera")
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ActivityCompat.requestPermissions(AddProduct.this,
+                                                new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                                    }
+                                })
+                                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .create().show();
+
+                    } else{
+
+                        ActivityCompat.requestPermissions(AddProduct.this,
+                                new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+
+                    }
+                }
 
 
             }
@@ -128,11 +168,20 @@ public class AddProduct extends AppCompatActivity {
 
                 ImageUploadToServerFunction();
 
-//                //going to another intent
-        Intent intent = new Intent(AddProduct.this, SellerHome.class);
-        startActivity(intent);
+//
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE)  {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void ImageUploadToServerFunction() {
@@ -157,6 +206,7 @@ public class AddProduct extends AppCompatActivity {
                     super.onPreExecute();
 
                     // Showing progress dialog at image upload time.
+                    Log.e("Pre-Execute", "Start loading");
                     progressDialog = ProgressDialog.show(AddProduct.this, "Uploading your information", "Please Wait", false, false);
                 }
 
@@ -174,12 +224,16 @@ public class AddProduct extends AppCompatActivity {
                     // Setting image as transparent after done uploading.
                     pic.setImageResource(android.R.color.transparent);
 
+                    //going to another intent
+                    Intent intent = new Intent(AddProduct.this, SellerHome.class);
+                    startActivity(intent);
+                    finish();
 
                 }
 
                 @Override
                 protected String doInBackground(Void... params) {
-
+                    Log.e("Do In Background", "Loading...");
                     ImageProcessClass imageProcessClass = new ImageProcessClass();
                     SharedPrefManager sp= new SharedPrefManager(AddProduct.this);
                     User u=sp.getUser();
@@ -197,7 +251,7 @@ public class AddProduct extends AppCompatActivity {
                     HashMapParams.put(image_path, ConvertImage);
 
                     String FinalData = imageProcessClass.ImageHttpRequest(URLs.URL_UPLOADIMAGE, HashMapParams);
-
+                    Log.e("Result:", FinalData);
                     return FinalData;
                 }
             }
@@ -233,6 +287,7 @@ public class AddProduct extends AppCompatActivity {
 
         public String ImageHttpRequest(String requestURL,HashMap<String, String> PData) {
 
+            Log.e("Request", "Start");
             StringBuilder stringBuilder = new StringBuilder();
 
             try {
@@ -245,12 +300,13 @@ public class AddProduct extends AppCompatActivity {
                 int RC ;
 
                 url = new URL(requestURL);
+                Log.e("URL:", ""+requestURL);
 
                 httpURLConnectionObject = (HttpURLConnection) url.openConnection();
 
-                httpURLConnectionObject.setReadTimeout(19000);
+                httpURLConnectionObject.setReadTimeout(50000);
 
-                httpURLConnectionObject.setConnectTimeout(19000);
+                httpURLConnectionObject.setConnectTimeout(50000);
 
                 httpURLConnectionObject.setRequestMethod("POST");
 
@@ -275,7 +331,7 @@ public class AddProduct extends AppCompatActivity {
                 RC = httpURLConnectionObject.getResponseCode();
 
                 if (RC == HttpsURLConnection.HTTP_OK) {
-
+                    Log.e("Connection: ", "OK");
                     bufferedReaderObject = new BufferedReader(new InputStreamReader(httpURLConnectionObject.getInputStream()));
 
                     stringBuilder = new StringBuilder();
@@ -283,14 +339,18 @@ public class AddProduct extends AppCompatActivity {
                     String RC2;
 
                     while ((RC2 = bufferedReaderObject.readLine()) != null){
-
+                        Log.e("Buffered: ", "Loop");
                         stringBuilder.append(RC2);
                     }
+                } else {
+                    Log.e("Connection error", "--"+httpURLConnectionObject.getResponseCode());
                 }
 
             } catch (Exception e) {
-//                e.printStackTrace();
+                Log.e("Do In Background", "Exception...");
+                e.printStackTrace();
                 stringBuilder.append("Network is Unreachable!!!");
+
             }
             return stringBuilder.toString();
         }
